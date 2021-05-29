@@ -10,6 +10,13 @@ import FormControllLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 import {makeStyles,ThemeProvider,createMuiTheme} from '@material-ui/core/styles';
 
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 const useStyle = makeStyles({
   root : {
     background : 'linear-gradient(45deg,#333,#999)',
@@ -20,6 +27,18 @@ const useStyle = makeStyles({
     padding : '5px 30px' 
   }
 })
+
+const theme = createMuiTheme({
+  palette :{
+    primary :{
+      main : "#FF8000",
+    },
+    secondary:{
+      main : "#9393FF",
+    }
+  }
+})
+
 function ButtonStyled() {
   const classes = useStyle();
   return <Button className = {classes.root}> styled button</Button>
@@ -33,9 +52,42 @@ function CheckboxExample(){
     )
   }
 function App() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
+    <ThemeProvider theme = {theme}>
+      <Container maxWidth = "lg"></Container>
     <div className="App">
       <header className="App-header">
+      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        Open Menu
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
+      <Typography variant = "h2">
+          Welcome to MUI
+        </Typography>
+        <Typography variant = "subtitle1">
+          Material Ui
+        </Typography>
+        
       <ButtonStyled />
       <TextField  variant = "filled" color = "primary" type = "phone number" label = "your celephone number" placeholder = "enter"/>
       <CheckboxExample />
@@ -51,6 +103,8 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
     </div>
+    
+</ThemeProvider>
   );
 }
 
