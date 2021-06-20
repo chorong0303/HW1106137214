@@ -17,10 +17,10 @@ const SalesorderListToolbar = (props) => {
     console.log('The link was clicked.');
     navigate('/app/Addsalesorder', { replace: true });
   }
-  function updatesalesorder(e) {
+  function addsalesdetail(e) {
     e.preventDefault();
     console.log('The link was clicked.');
-    navigate('/app/Updatesalesorder', { replace: true });
+    navigate('/app/Addsalesdetail', { replace: true });
   }
   return (
     <Box {...props}>
@@ -30,19 +30,12 @@ const SalesorderListToolbar = (props) => {
           justifyContent: 'flex-end'
         }}
       >
-        <Button>
-          Select
-        </Button>
-        <Button>
-          Delete
-        </Button>
         <Button
-          sx={{ mx: 1 }}
-          onClick={updatesalesorder}
+          onClick={addsalesdetail}
           color="primary"
           variant="contained"
         >
-          Update
+          Add salesdetail
         </Button>
         <Button
           onClick={addsalesorder}
